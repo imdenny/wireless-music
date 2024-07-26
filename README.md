@@ -1,5 +1,4 @@
-##### Official Website: www.hi-wooya.com
-##### QQ: 317312379
+
 
 ### ethmode command
 | command |   status   |  
@@ -64,7 +63,7 @@ HIWOOYA1664:16MB FLASH + 64MB RAM
 HIWOOYA3264:32MB FLASH + 64MB RAM
 
 # 5.make
-$ make -j4
+$ make -j4 V=s
 
 # 6.image
 the binary image name like this in bin/ramips/:
