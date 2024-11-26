@@ -36,7 +36,7 @@ $brew install coreutils findutils gawk gnu-getopt gnu-tar grep wget quilt xz
 note: gnu-getopt is keg-only, so force linking it:brew ln gnu-getopt --force
 
 # 2.download the source use git
-$ git https://kkgithub.com/hi-wooya/openwrt-hiwooya.git
+$ git https://kkgithub.com/imdenny/wireless-music.git
 # 3.update the feeds
 $ cd openwrt-hiwooya
 $ ./scripts/feeds update -a

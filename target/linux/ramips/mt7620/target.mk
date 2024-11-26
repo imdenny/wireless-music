@@ -3,7 +3,7 @@
 #
 
 SUBTARGET:=mt7620
-BOARDNAME:=MT7620 hi-wooya boards
+BOARDNAME:=MT7620 wireless-music boards
 ARCH_PACKAGES:=ramips_24kec
 FEATURES+=usb
 CPU_TYPE:=24kec

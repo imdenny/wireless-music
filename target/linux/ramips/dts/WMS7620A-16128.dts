@@ -3,7 +3,7 @@
 /include/ "mt7620a.dtsi"
 
 / {
-	compatible = "hi-wooya", "ralink,mt7620a-soc";
+	compatible = "wireless-music", "ralink,mt7620a-soc";
 	model = "WMS7620A-16128";
 
 	palmbus@10000000 {
