@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e  # ³ö´íÁ¢¼´ÍË³ö
+echo "Copying filescanner_ffmpeg.c..."
+cp -i build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/owntone-28.12/src/library/filescanner_ffmpeg.c \
+    ../../build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/owntone-28.12/src/library/
+echo "Copying pipe.c..."
+cp -i build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/owntone-28.12/src/inputs/pipe.c \
+    ../../build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/owntone-28.12/src/inputs/
+echo "Copying db.c..."
+cp -i build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/owntone-28.12/src/db.c \
+    ../../build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/owntone-28.12/src/
+echo "All files copied successfully!"
