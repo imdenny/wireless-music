@@ -8,20 +8,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openssl
-PKG_BASE:=1.0.2
+PKG_BASE:=1.1.0
 PKG_BUGFIX:=h
 PKG_VERSION:=$(PKG_BASE)$(PKG_BUGFIX)
-PKG_RELEASE:=1
-PKG_USE_MIPS16:=0
+PKG_TAG:=OpenSSL_$(subst .,_,${PKG_VERSION})
 
-PKG_BUILD_PARALLEL:=1
-
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://www.openssl.org/source/ \
-	http://www.openssl.org/source/old/$(PKG_BASE)/ \
-	ftp://ftp.funet.fi/pub/crypt/mirrors/ftp.openssl.org/source \
-	ftp://ftp.sunet.se/pub/security/tools/net/openssl/source/
-PKG_MD5SUM:=9392e65072ce4b614c1392eefc1f23d0
+PKG_SOURCE:=openssl-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/openssl/openssl/releases/download/$(PKG_TAG)/
+PKG_MD5SUM:=5271477e4d93f4ea032b665ef095ff24
 
 PKG_LICENSE:=OpenSSL
 PKG_LICENSE_FILES:=LICENSE
@@ -61,7 +55,7 @@ $(call Package/openssl/Default)
   SECTION:=libs
   SUBMENU:=SSL
   CATEGORY:=Libraries
-  DEPENDS:=+zlib
+  DEPENDS:=+zlib  +libpthread
   TITLE+= (libraries)
   ABI_VERSION:=$(PKG_VERSION)
   MENU:=1
@@ -90,8 +84,8 @@ This package contains the OpenSSL command-line utility.
 endef
 
 
-OPENSSL_NO_CIPHERS:= no-idea no-md2 no-mdc2 no-rc5 no-sha0 no-camellia no-krb5
-OPENSSL_OPTIONS:= shared no-err no-hw zlib-dynamic no-sse2 no-ssl2
+OPENSSL_NO_CIPHERS:= no-idea no-md2 no-mdc2 no-rc5 no-camellia 
+OPENSSL_OPTIONS:= shared no-err no-hw zlib-dynamic no-sse2 no-ssl2 no-async
 
 ifdef CONFIG_OPENSSL_ENGINE_CRYPTO
   OPENSSL_OPTIONS += -DHAVE_CRYPTODEV
@@ -99,7 +93,7 @@ ifdef CONFIG_OPENSSL_ENGINE_CRYPTO
     OPENSSL_OPTIONS += -DUSE_CRYPTODEV_DIGESTS
   endif
 else
-  OPENSSL_OPTIONS += no-engines
+#  OPENSSL_OPTIONS += no-engines
 endif
 
 ifndef CONFIG_OPENSSL_WITH_EC
@@ -120,7 +114,7 @@ ifeq ($(CONFIG_x86_64),y)
 else
   OPENSSL_OPTIONS+=no-sse2
   ifeq ($(CONFIG_mips)$(CONFIG_mipsel),y)
-    OPENSSL_TARGET:=linux-mips-openwrt
+    OPENSSL_TARGET:=linux-mips32
 #  else ifeq ($(CONFIG_arm)$(CONFIG_armeb),y)
 #    OPENSSL_TARGET:=linux-armv4-openwrt
   else
@@ -173,20 +167,20 @@ define Build/Compile
 		AR="$(TARGET_CROSS)ar r" \
 		RANLIB="$(TARGET_CROSS)ranlib" \
 		OPENWRT_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
-		$(OPENSSL_MAKEFLAGS) \
-		build-shared
+		$(OPENSSL_MAKEFLAGS) 
+#		build-shared
 	# Work around openssl build bug to link libssl.so with libcrypto.so.
 	-rm $(PKG_BUILD_DIR)/libssl.so.*.*.*
 	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \
 		CC="$(TARGET_CC)" \
 		OPENWRT_OPTIMIZATION_FLAGS="$(TARGET_CFLAGS)" \
 		$(OPENSSL_MAKEFLAGS) \
-		do_linux-shared
+#		do_linux-shared
 	$(MAKE) -C $(PKG_BUILD_DIR) \
 		CC="$(TARGET_CC)" \
-		INSTALL_PREFIX="$(PKG_INSTALL_DIR)" \
+		DESTDIR="$(PKG_INSTALL_DIR)" \
 		$(OPENSSL_MAKEFLAGS) \
-		install
+		install_sw
 endef
 
 define Build/InstallDev
