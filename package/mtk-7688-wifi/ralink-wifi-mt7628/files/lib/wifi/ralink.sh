@@ -168,7 +168,7 @@ CountryRegion=${countryregion:-0}
 CountryRegionABand=7
 CountryCode=${country:-US}
 BssidNum=${ssid_num:-1}
-SSID1=${ssid1:-HI-WOOYA}
+SSID1=${ssid1:-Air-Audio}
 SSID2=
 SSID3=
 SSID4=
@@ -639,7 +639,7 @@ config wifi-iface
 	option device   ra${i}
 	option network	lan
 	option mode     ap
-	option ssid     HI-WOOYA_${i#0}$(cat /sys/class/net/eth0/address|awk -F ":" '{print $5""$6 }'| tr a-z A-Z)
+	option ssid     Air-Audio_${i#0}$(cat /sys/class/net/eth0/address|awk -F ":" '{print $5""$6 }'| tr a-z A-Z)
 	option encryption psk2
 	option key 12345678
 	option ApCliEnable '1'
