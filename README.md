@@ -67,3 +67,13 @@ $ make -j4 V=s
 # 6.image
 the binary image name like this in bin/ramips/:
 openwrt-ramips-mt7688-Hiwooyaxxxxx-squashfs-sysupgrade.bin
+
+# 7.change luci theme (TBD)
+$ cd feeds/luci/themes
+$ git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
+$ ./scripts/feeds update luci
+$ ./scripts/feeds install luci-theme-argon
+$ make menuconfig
+$ --->LuCI -> Themes -> luci-theme-argon
+$ make -j1 V=s
+
