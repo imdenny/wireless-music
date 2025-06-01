@@ -66,7 +66,7 @@ $ make -j4 V=s
 
 # 6.image
 the binary image name like this in bin/ramips/:
-openwrt-ramips-mt7688-Hiwooyaxxxxx-squashfs-sysupgrade.bin
+openwrt-ramips-mt7688-ChaosTronxxxxx-squashfs-sysupgrade.bin
 
 # 7.change luci theme (TBD)
 $ cd feeds/luci/themes

@@ -1,5 +1,5 @@
 config system
-	option hostname	Hiwooya
+	option hostname	ChaosTron
 	option timezone	CST-8
 
 config timeserver ntp
